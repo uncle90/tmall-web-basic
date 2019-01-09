@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>公共页面_搜索栏</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
+    <style type="text/css">
+        body{
+            font-size: 12px;
+            font-family: Arial;
+        }
+        a{
+            color: #999999;
+        }
+        a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+        .red{
+            color: #C40000 !important;
+        }
+        .searchbox{}
+        .searchbox_main{
+            max-width: 1024px;
+            position: relative;
+            margin: 0px auto;
+        }
+        .searchbox_main img.logo{
+            position: absolute;
+            top: -50px;
+            left: 10px;
+            z-index:-1; /*-1表示放在下面，免得图片挡住了输入框*/
+        }
+        .searchbox_main .search-box{
+            width: 400px;
+            height: 40px;
+            margin: 50px auto;
+            background-color: #C40000;
+        }
+        .searchbox_main .search-box input{
+            width: 275px;
+            height: 36px;
+            border: none;
+            outline: none;
+            margin: 2px;
+            padding: 5px;
+        }
+        /*把search-below挤出height区*/
+        .searchbox_main .search-box button{
+            width: 110px;
+            background-color: #C40000;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            vertical-align: middle;
+            border: none;
+            outline: none;
+        }
+        .searchbox_main .search-below{
+            margin-left: -20px;
+            margin-top: 5px;
+        }
+        .searchbox_main .search-below a{
+            font-size: 14px;
+            margin: 0px 20px;
+        }
+    </style>
+</head>
+<div class="searchbox">
+    <div class="searchbox_main">
+        <a href="#">
+            <img class="logo" src="image/logo.gif">
+        </a>
+        <div class="search-box">
+            <input placeholder="时尚眼镜 太阳镜" type="text"/>
+            <button type="submit">搜索</button>
+            <div class="search-below">
+                <a href="#">平衡车</a>
+                <span>|</span>
+                <a href="#">扫地机器人</a>
+                <span>|</span>
+                <a href="#">原汁机</a>
+                <span>|</span>
+                <a href="#">冰箱</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

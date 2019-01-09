@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页_轮播</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
+    <style type="text/css">
+        body{
+            font-size: 12px;
+            font-family: Arial;
+        }
+        a{
+            color: #999999;
+        }
+        .red{
+            color: #C40000 !important;
+        }
+        nav.top{
+            background-color: #f2f2f2;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom:1px solid #e7e7e7;
+        }
+        nav.top .top_main{
+            max-width: 1024px;
+            margin: 0px auto;
+        }
+        nav.top .top_main .float-right{
+            display: inline-block;
+            float: right;
+        }
+        nav.top .top_main span, nav.top a{
+            color: #999999;
+            margin: 0px 10px;
+        }
+        nav.top .top_main a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+    </style>
+</head>
+
+<nav class="top">
+    <div class="top_main">
+        <a href="#">
+            <span class="glyphicon glyphicon-shopping-cart red"></span>
+            天猫首页
+        </a>
+        <span>喵，欢迎来天猫</span>
+        <a href="#">请登录</a>
+        <a href="#">免费注册</a>
+        <span class="float-right">
+            <a href="#">我的订单</a>
+            <a href="#">
+                <span class="glyphicon glyphicon-shopping-cart red"></span>
+                购物车<strong>0</strong>件
+            </a>
+        </span>
+    </div>
+</nav>

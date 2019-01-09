@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页_轮播</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
+    <style type="text/css">
+        body{
+            font-size: 12px;
+            font-family: Arial;
+            min-width: 1024px;
+            /* width: 1920px; */
+        }
+        a{
+            color: #999999;
+        }
+        a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+        .red{
+            color: #C40000 !important;
+        }
+        nav.top{
+            background-color: #f2f2f2;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom:1px solid #e7e7e7;
+        }
+        nav.top .top_main{
+            max-width: 1024px;
+            margin: 0px auto;
+        }
+        nav.top .top_main .float-right{
+            display: inline-block;
+            float: right;
+        }
+        nav.top .top_main span, nav.top a{
+            color: #999999;
+            margin: 0px 10px;
+        }
+        nav.top .top_main a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+        .searchbox{}
+        .searchbox_main{
+            max-width: 1024px;
+            position: relative;
+            margin: 0px auto;
+        }
+        .searchbox_main img.logo{
+            position: absolute;
+            top: -50px;
+            left: -40px;
+            z-index:-1; /*-1表示放在下面，免得图片挡住了输入框*/
+        }
+        .searchbox_main .search-box{
+            width: 400px;
+            height: 40px;
+            margin: 50px auto;
+            background-color: #C40000;
+        }
+        .searchbox_main .search-box input{
+            width: 275px;
+            height: 36px;
+            border: none;
+            outline: none;
+            margin: 2px;
+            padding: 5px;
+        }
+        /*把search-below挤出height区*/
+        .searchbox_main .search-box button{
+            width: 110px;
+            background-color: #C40000;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            vertical-align: middle;
+            border: none;
+            outline: none;
+        }
+        .searchbox_main .search-below{
+            margin-left: -20px;
+            margin-top: 5px;
+            color: #999999;
+        }
+        .searchbox_main .search-below a{
+            font-size: 14px;
+            margin: 0px 20px;
+        }
+        .categoryWithCarousel{
+            position: relative;/*后面的carouselBackgroundDiv是居于这个div进行绝对定位的*/
+            width: 100%;
+        }
+        .categoryWithCarousel .head-bar{
+            width: 100%;
+            background-color: #DD2727;
+            height: 36px;
+        }
+        .categoryWithCarousel .head-bar .head{
+            background-color: #C60A0A;
+            width: 200px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin-left: 120px;
+        }
+        .categoryWithCarousel .head-bar .head, .head-bar .rightMenu{
+            display: inline-block;
+        }
+        .categoryWithCarousel .head-bar .rightMenu img{
+            height: 30px;
+        }
+        .categoryWithCarousel .head-bar .rightMenu a{
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 0px 20px;
+        }
+        .categoryWithCarousel .categoryMenu{
+            position: absolute;
+            z-index: 2;
+            top: 0px;
+            left: 100px;
+            width: 200px;
+            background-color: #e2e2e3;
+            margin-left: 20px;
+        }
+        .categoryWithCarousel .categoryMenu .eachCategory{
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding-left: 10px;
+        }
+        .categoryWithCarousel .categoryMenu .eachCategory:hover{
+            background-color: white;
+        }
+        .categoryWithCarousel .categoryMenu a{
+            color: #000;
+            margin-left: 10px;
+        }
+        .categoryWithCarousel .categoryMenu a:hover{
+            color: lightskyblue;
+            text-decoration: none;
+        }
+        .categoryWithCarousel .products-aside-category{
+            position: absolute;
+            height: 510px;
+            width: 824px; /*轮播-菜单=商品列表*/
+            background-color: white;
+            top: 0px;
+            left: 100px;
+            margin-left: 220px;
+            z-index: 2;
+        }
+        .categoryWithCarousel .products-aside-category .row{
+            font-size: 14px;
+            margin: 20px 80px 0px 80px;
+        }
+        .categoryWithCarousel .products-aside-category .row .bottom-line{
+            margin-top: 20px;
+            border-bottom: 1px dashed #e7e7e7;
+        }
+        .categoryWithCarousel .products-aside-category .high-light{
+            color: lightskyblue;
+        }
+        .categoryWithCarousel .carousel-of-product{
+            width: 1024px;
+            height: 510px;
+            margin: 0px auto;
+        }
+        .categoryWithCarousel .carousel-inner img{
+            height: 510px !important;
+        }
+        .categoryWithCarousel .carouselBackgroundDiv{
+            width: 100%;
+            height: 510px;
+            background-color: #E8E8E8;
+            position: absolute;
+            top: 36px; /*往下移【菜单栏】的高度*/
+            z-index: -1;
+        }
+        .categoryProducts{
+            width: 1024px;
+            margin: 10px auto;
+            padding: 50px 10px;
+            background-color: #F5F5F5;
+        }
+        .categoryProducts .eachCategoryProducts{
+            margin: 0px 0px 40px 0px;
+        }
+        .categoryProducts .eachCategoryProducts .category-title .left-mark{
+            display: inline-block;
+            width: 5px;
+            background-color: #19C8A9;
+            height: 20px;
+            vertical-align: top;
+        }
+        .categoryProducts .eachCategoryProducts .category-title .title{
+            color: #646464;
+            margin-left: 30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .categoryProducts .eachCategoryProducts .product-item{
+            float: left;
+            width: 189px;
+            height: 285px;
+            cursor: pointer;
+            margin: 8px 4px;
+            background-color: white;
+            border: 1px solid transparent;
+        }
+        .categoryProducts .eachCategoryProducts .product-item:hover{
+            border: 1px solid #C40000;
+        }
+        .categoryProducts .product-item img{
+            width: 187px;
+            height: 190px;
+        }
+        .categoryProducts .product-item .product-desc{
+            display: block;
+            padding: 16px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .categoryProducts .product-item .product-price{
+            display: block;
+            padding-left: 16px;
+            font-size: 16px;
+            color: #FF003A;
+            margin-top: -10px;
+        }
+        .categoryProducts .category-end{
+            display: block;
+            margin: 0px auto;
+        }
+        .footer{
+            border-top: 1px solid #e7e7e7;
+        }
+        .footer .horizontal-line{
+            border-top: 1px solid #e7e7e7;
+        }
+        .footer .footer-top{
+            margin: 24px auto;
+            text-align: center;
+        }
+        .footer .footer-middle{
+            max-width: 1024px;
+            margin: 0px auto;
+            padding-top: 30px;
+        }
+        .footer .footer-middle .column{
+            float: left;
+            width: 20%;
+            padding-left: 10px;
+        }
+        .footer .footer-middle .column a{
+            display: block;
+            padding-top: 3px;
+        }
+        .footer .footer-middle .columnTitle{
+            color: #646464;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer .footer-copyright{
+            background-color: black;
+            margin-top: 20px;
+            border-top: 2px solid #C40000;
+        }
+        .footer .copyright_main{
+            position: relative;
+            max-width: 1024px;
+            margin: 0px auto;
+        }
+        .footer .copyright_main .cateye{
+            position: absolute;
+            display: block;
+            top: -34px;
+            left: 5px;
+        }
+        .footer .copyright_main .white{
+            margin-left: 10px;
+            padding: 10px 0px;
+        }
+        .footer .copyright_main .white a, .footer .copyright_main .white span{
+            color: white;
+        }
+        .footer .copyright_main .white a{
+            padding: 0px 5px;
+        }
+        .footer .copyright_main .white a:first-child{
+            padding-left: 0px;
+        }
+        .footer .copyright_main .license{
+            color: #A4A4A4;
+            margin-left: 10px;
+            padding-bottom: 30px;
+        }
+        .footer .copyright_main .license .copyrightYear{
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+
+<nav class="top">
+    <div class="top_main">
+        <a href="#">
+            <span class="glyphicon glyphicon-home red"></span>
+            天猫首页
+        </a>
+        <span>喵，欢迎来天猫</span>
+        <a href="#">请登录</a>
+        <a href="#">免费注册</a>
+        <span class="float-right">
+            <a href="#">我的订单</a>
+            <a href="#">
+                <span class="glyphicon glyphicon-shopping-cart red"></span>
+                购物车<strong>0</strong>件
+            </a>
+        </span>
+    </div>
+</nav>
+
+<div class="searchbox">
+    <div class="searchbox_main">
+        <a href="#">
+            <img class="logo" src="image/logo.gif">
+        </a>
+        <div class="search-box">
+            <input placeholder="时尚眼镜 太阳镜" type="text"/>
+            <button type="submit">搜索</button>
+            <div class="search-below">
+                <a href="#">平衡车</a>
+                <span>|</span>
+                <a href="#">扫地机器人</a>
+                <span>|</span>
+                <a href="#">原汁机</a>
+                <span>|</span>
+                <a href="#">冰箱</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="categoryWithCarousel">
+    <div class="head-bar">
+        <div class="head">
+            <span class="glyphicon glyphicon-th-list" style="margin: 0px 10px"></span>
+            <span>商品分类</span>
+        </div>
+        <div class="rightMenu">
+            <a href="#"><img src="image/chaoshi.png"/></a>
+            <a href="#"><img src="image/guoji.png"/></a>
+            <span><a href="#">平板电视</a></span>
+            <span><a href="#">马桶</a></span>
+            <span><a href="#">沙发</a></span>
+            <span><a href="#">电热水器</a></span>
+        </div>
+    </div>
+    <div style="position: relative;left: 0;top: 0;">
+        <div class="categoryMenu">
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">平板电视</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">马桶</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">沙发</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">电热水器</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">平衡车</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">扫地机器人</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">原汁机</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">冰箱</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">空调</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">女表</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">男表</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">男士手拿包</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">男士西服</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">时尚男鞋</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">品牌女装</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">太阳镜</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">安全座椅</a>
+            </div>
+        </div>
+    </div>
+    <div style="position: relative;left: 0;top: 0;">
+        <div class="products-aside-category">
+            <div class="row">
+                <a href="#">屏大影院</a>
+                <a href="#">周末</a>
+                <a href="#">新品特惠</a>
+                <a href="#">32吋电视机</a>
+                <a href="#">智能网络</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">USB高清解</a>
+                <a href="#" class="high-light">芒果TV在线</a>
+                <a href="#">抢购价</a>
+                <a href="#">USB解码</a>
+                <a href="#">32英吋</a>
+                <a href="#">10核</a>
+                <a href="#">TCL品牌日</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">不要赠品</a>
+                <a href="#">新品上市</a>
+                <a href="#">4K硬屏</a>
+                <a href="#">领100元券</a>
+                <a href="#" class="high-light">智能高清</a>
+                <a href="#">8月，酷暑</a>
+                <a href="#">8月大促</a>
+                <a href="#">天猫定制</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">智能操作系统</a>
+                <a href="#">金色外观</a>
+                <a href="#">三星屏幕</a>
+                <a href="#">客厅爆款</a>
+                <a href="#">八核配置</a>
+                <a href="#">限时特惠</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#" class="high-light">限时特惠</a>
+                <a href="#">热销爆款</a>
+                <a href="#" class="high-light">4K全高清</a>
+                <a href="#" class="high-light">六核智能</a>
+                <a href="#">14核4K</a>
+                <a href="#">YUNOS</a>
+                <a href="#">YUNOS</a>
+                <a href="#">64位处理器</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">YUNOS</a>
+                <a href="#">微信电视</a>
+                <a href="#" class="high-light">4k超清</a>
+                <a href="#">64位真4K</a>
+                <a href="#">10核机芯</a>
+                <a href="#">V字黑釉底座</a>
+                <a href="#">4K超清</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">64位14核</a>
+                <a href="#">海量影视</a>
+                <a href="#">人气爆款</a>
+                <a href="#">限时特惠</a>
+                <a href="#">真4K屏</a>
+                <a href="#">65吋巨屏</a>
+                <a href="#" class="high-light">4K超清视界</a>
+                <a href="#">限时特惠</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">55寸旗舰</a>
+                <a href="#">4K机皇</a>
+                <a href="#">曲面机皇</a>
+                <a href="#">轻薄4K</a>
+                <div class="bottom-line"></div>
+            </div>
+        </div>
+    </div>
+    <div id="carousel-of-product" class="carousel slide carousel-of-product" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-of-product" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-of-product" data-slide-to="1"></li>
+            <li data-target="#carousel-of-product" data-slide-to="2"></li>
+            <li data-target="#carousel-of-product" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active"><img src="image/lunbo/1.jpg"></div>
+            <div class="item"><img src="image/lunbo/2.jpg"></div>
+            <div class="item"><img src="image/lunbo/3.jpg"></div>
+            <div class="item"><img src="image/lunbo/4.jpg"></div>
+        </div>
+    </div>
+    <!--轮播背景框-->
+    <div class="carouselBackgroundDiv"></div>
+</div>
+
+<div class="categoryProducts">
+    <div class="eachCategoryProducts">
+        <div class="category-title">
+            <span class="left-mark"></span><span class="title">平板电视</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/676.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 夏普屏PANDA/熊猫 LE39D71S</a>
+            <span class="product-price">1,874.25</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/665.jpg" /></a>
+            <a href="#" class="product-desc">[热销] Changhong/长虹 65S1安卓智</a>
+            <span class="product-price">3,824.16</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/654.jpg" /></a>
+            <a href="#" class="product-desc">[热销] Hisense/海信 LED40EC52</a>
+            <span class="product-price">1,439.40</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/643.jpg" /></a>
+            <a href="#" class="product-desc">[热销] Hisense/海信 LED49EC32</a>
+            <span class="product-price">1,679.40</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/632.jpg" /></a>
+            <a href="#" class="product-desc">[热销] Konka/康佳 LED32S1卧室32</a>
+            <span class="product-price">1,104.35</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="eachCategoryProducts">
+        <div class="category-title">
+            <span class="left-mark"></span><span class="title">马桶</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/1324.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 纳蒂兰卡 1082卫浴洁具 钻石切边 坐</a>
+            <span class="product-price">1,710.00</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/1313.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 德国DGPOSY超漩式彩色马桶缓降坐便器</a>
+            <span class="product-price">1,799.25</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/1302.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 纳蒂兰卡1066卫浴漩冲虹吸式马桶350</a>
+            <span class="product-price">1,503.00</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/1291.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 箭牌马桶/ARROW AB1118脲醛盖</a>
+            <span class="product-price">1,482.00</span>
+        </div>
+        <div class="product-item">
+            <a href="#"><img src="image/productSingle/1280.jpg" /></a>
+            <a href="#" class="product-desc">[热销] 乐洁士智能马桶高品质全自动遥控感应一体式</a>
+            <span class="product-price">8,512.00</span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <img class="category-end" src="image/end.png"/>
+</div>
+
+<div class="footer">
+    <div class="footer-top">
+        <a href="#"><img src="image/ensure.png"/></a>
+    </div>
+    <div class="horizontal-line"></div>
+    <div class="footer-middle">
+        <div class="column">
+            <span class="columnTitle">购物指南</span>
+            <a href="#">免费注册</a>
+            <a href="#">开通支付宝</a>
+            <a href="#">支付宝充值</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">天猫保障</span>
+            <a href="#">发票保障</a>
+            <a href="#">售后规则</a>
+            <a href="#">缺货赔付</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">支付方式</span>
+            <a href="#">快捷支付</a>
+            <a href="#">信用卡</a>
+            <a href="#">蚂蚁花呗</a>
+            <a href="#">货到付款</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">商家服务</span>
+            <a href="#">商家入驻</a>
+            <a href="#">商家中心</a>
+            <a href="#">天猫智库</a>
+            <a href="#">天猫规则</a>
+            <a href="#">物流服务</a>
+            <a href="#">喵言喵语</a>
+            <a href="#">运营服务</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">手机天猫</span>
+            <a href="#"><img src="image/ma.png"/></a>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="footer-copyright">
+        <div class="copyright_main">
+            <img src="image/cateye.png" class="cateye"/>
+            <div class="white">
+                <a href="#">关于天猫</a>
+                <a href="#">帮助中心</a>
+                <a href="#">开放平台</a>
+                <a href="#">诚聘英才</a>
+                <a href="#">联系我们</a>
+                <a href="#">网站合作</a>
+                <a href="#">法律声明</a>
+                <a href="#">知识产权</a>
+                <a href="#">廉正举报</a>
+            </div>
+            <div class="white">
+                <a href="#">阿里巴巴集团</a>
+                <span>|</span>
+                <a href="#">淘宝网</a>
+                <span>|</span>
+                <a href="#">天猫</a>
+                <span>|</span>
+                <a href="#">聚划算</a>
+                <span>|</span>
+                <a href="#">全球速卖通</a>
+                <span>|</span>
+                <a href="#">阿里巴巴国际交易市场</a>
+                <span>|</span>
+                <a href="#">1688</a>
+                <span>|</span>
+                <a href="#">阿里妈妈</a>
+                <span>|</span>
+                <a href="#">阿里旅行·去啊</a>
+                <span>|</span>
+                <a href="#">阿里云计算</a>
+                <span>|</span>
+                <a href="#">阿里通信</a>
+                <span>|</span>
+                <a href="#">YunOS</a>
+                <span>|</span>
+                <a href="#">阿里旅行·去啊</a>
+                <span>|</span>
+                <a href="#">万网</a>
+                <span>|</span>
+                <a href="#">高德</a>
+                <span>|</span>
+                <a href="#">优视</a>
+                <span>|</span>
+                <a href="#">友盟</a>
+                <span>|</span>
+                <a href="#">虾米</a>
+                <span>|</span>
+                <a href="#">天天动听</a>
+                <span>|</span>
+                <a href="#">来往</a>
+                <span>|</span>
+                <a href="#">钉钉</a>
+                <span>|</span>
+                <a href="#">支付宝</a>
+            </div>
+            <div class="license">
+                <span>增值电信业务经营许可证： 浙B2-20110446</span>
+                <span>网络文化经营许可证：浙网文[2015]0295-065号</span>
+                <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号</span>
+                <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
+                <div class="copyrightYear">&copy;&nbsp;2003-2016 TMALL.COM 版权所有</div>
+                <div>
+                    <img src="image/copyRight1.jpg" />
+                    <img src="image/copyRight2.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

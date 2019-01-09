@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页_轮播</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
+    <style type="text/css">
+        body{
+             font-size: 12px;
+             font-family: Arial;
+        }
+        a{
+            color: #999999;
+        }
+        .red{
+            color: #C40000 !important;
+        }
+        .categoryWithCarousel{
+            position: relative;/*后面的carouselBackgroundDiv是居于这个div进行绝对定位的*/
+            width: 100%;
+        }
+        .categoryWithCarousel .head-bar{
+            width: 100%;
+            background-color: #DD2727;
+            height: 36px;
+        }
+        .categoryWithCarousel .head-bar .head{
+            background-color: #C60A0A;
+            width: 200px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin-left: 20px;
+        }
+        .categoryWithCarousel .head-bar .head, .head-bar .rightMenu{
+            display: inline-block;
+        }
+        .categoryWithCarousel .head-bar .rightMenu img{
+            height: 30px;
+        }
+        .categoryWithCarousel .head-bar .rightMenu a{
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 0px 20px;
+        }
+        .categoryWithCarousel .carousel-of-product{
+            width: 1024px;
+            height: 510px;
+            margin: 0px auto;
+        }
+        .categoryWithCarousel .carousel-inner img{
+            height: 510px !important;
+        }
+        .carouselBackgroundDiv{
+            width: 100%;
+            height: 510px;
+            background-color: #E8E8E8;
+            position: absolute;
+            top: 36px; /*往下移【菜单栏】的高度*/
+            z-index: -1;
+        }
+        .categoryWithCarousel .categoryMenu{
+            position: absolute;
+            width: 200px;
+            background-color: #1b6d85;
+        }
+        .categoryWithCarousel .products-list{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 824px;
+            background-color: #00AAEE;
+        }
+    </style>
+</head>
+
+<div class="categoryWithCarousel">
+    <div class="head-bar">
+        <div class="head">
+            <span class="glyphicon glyphicon-th-list" style="margin: 0px 10px"></span>
+            <span>商品分类</span>
+        </div>
+        <div class="rightMenu">
+            <a href="#"><img src="image/chaoshi.png"/></a>
+            <a href="#"><img src="image/guoji.png"/></a>
+            <span><a href="#">平板电视</a></span>
+            <span><a href="#">马桶</a></span>
+            <span><a href="#">沙发</a></span>
+            <span><a href="#">电热水器</a></span>
+        </div>
+    </div>
+    <div style="position:relative;">
+        <div class="categoryMenu">
+            <!--<div class="category">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">平板电视</a>
+            </div>
+            <div class="eachCategory">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="#">平板电视</a>
+            </div>-->
+        </div>
+        <div class="products-list"></div>
+    </div>
+    <div id="carousel-of-product" class="carousel slide carousel-of-product" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-of-product" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-of-product" data-slide-to="1"></li>
+            <li data-target="#carousel-of-product" data-slide-to="2"></li>
+            <li data-target="#carousel-of-product" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active"><img src="image/lunbo/1.jpg"></div>
+            <div class="item"><img src="image/lunbo/2.jpg"></div>
+            <div class="item"><img src="image/lunbo/3.jpg"></div>
+            <div class="item"><img src="image/lunbo/4.jpg"></div>
+        </div>
+    </div>
+    <!--轮播背景框-->
+    <div class="carouselBackgroundDiv"></div>
+</div>
