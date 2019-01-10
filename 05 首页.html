@@ -1,9 +1,38 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>首页_轮播</title>
+    <title>首页</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //天猫耳朵
+            $(".categoryWithCarousel .rightMenu span").mouseenter(function () {
+                var a = $(this).position().left;
+                var b = $(this).position().top;
+                var c = $("img.catear").eq(0).css("width");
+                var width = $(this).css("width");
+                var left = parseInt(a) + parseInt(width)/2 - parseInt(c)/2;
+                var top = parseInt(b) - 20;
+                $("img.catear").css("top",top);
+                $("img.catear").css("left",left);
+                $("img.catear").fadeIn(500);
+            }).mouseout(function () {
+                $("img.catear").hide();
+            });
+
+            //商品菜单 & 商品列表
+            $(".eachCategory, .products-aside-category")
+                .mouseenter(function(){
+                    var cid = $(this).attr("cid");
+                    $(".products-aside-category[cid=" + cid + "]").show();
+                })
+                .mouseleave(function(){
+                    var cid = $(this).attr("cid");
+                    $(".products-aside-category[cid="+cid+"]").hide();
+                });
+        });
+    </script>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
     <style type="text/css">
         body{
@@ -112,7 +141,15 @@
         .categoryWithCarousel .head-bar .head, .head-bar .rightMenu{
             display: inline-block;
         }
-        .categoryWithCarousel .head-bar .rightMenu img{
+        .categoryWithCarousel .head-bar .rightMenu{
+            position: relative;
+        }
+        .categoryWithCarousel .head-bar .rightMenu img.catear{
+            position: absolute;
+            height: 15px;
+            display: none;
+        }
+        .categoryWithCarousel .head-bar .rightMenu a img{
             height: 30px;
         }
         .categoryWithCarousel .head-bar .rightMenu a{
@@ -123,7 +160,7 @@
         }
         .categoryWithCarousel .categoryMenu{
             position: absolute;
-            z-index: 2;
+            z-index: 99;
             top: 0px;
             left: 100px;
             width: 200px;
@@ -155,7 +192,8 @@
             top: 0px;
             left: 100px;
             margin-left: 220px;
-            z-index: 2;
+            z-index: 99;
+            display: none;
         }
         .categoryWithCarousel .products-aside-category .row{
             font-size: 14px;
@@ -355,8 +393,9 @@
             <span>商品分类</span>
         </div>
         <div class="rightMenu">
-            <a href="#"><img src="image/chaoshi.png"/></a>
-            <a href="#"><img src="image/guoji.png"/></a>
+            <img id="aaa" src="image/catear.png" class="catear"/>
+            <span><a href="#"><img src="image/chaoshi.png"/></a></span>
+            <span><a href="#"><img src="image/guoji.png"/></a></span>
             <span><a href="#">平板电视</a></span>
             <span><a href="#">马桶</a></span>
             <span><a href="#">沙发</a></span>
@@ -365,78 +404,78 @@
     </div>
     <div style="position: relative;left: 0;top: 0;">
         <div class="categoryMenu">
-            <div class="eachCategory">
+            <div class="eachCategory" cid="83">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">平板电视</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="82">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">马桶</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="81">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">沙发</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="80">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">电热水器</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="79">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">平衡车</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="78">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">扫地机器人</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="77">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">原汁机</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="76">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">冰箱</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="75">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">空调</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="74">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">女表</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="73">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">男表</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="72">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">男士手拿包</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="71">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">男士西服</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="69">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">时尚男鞋</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="68">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">品牌女装</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="64">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">太阳镜</a>
             </div>
-            <div class="eachCategory">
+            <div class="eachCategory" cid="60">
                 <span class="glyphicon glyphicon-link"></span>
                 <a href="#">安全座椅</a>
             </div>
         </div>
     </div>
     <div style="position: relative;left: 0;top: 0;">
-        <div class="products-aside-category">
+        <div class="products-aside-category" cid="83">
             <div class="row">
                 <a href="#">屏大影院</a>
                 <a href="#">周末</a>
@@ -512,6 +551,154 @@
                 <a href="#">4K机皇</a>
                 <a href="#">曲面机皇</a>
                 <a href="#">轻薄4K</a>
+                <div class="bottom-line"></div>
+            </div>
+        </div>
+        <div class="products-aside-category" cid="82">
+            <div class="row">
+                <a href="#">高性价比</a>
+                <a href="#">纳米自洁釉</a>
+                <a href="#">盖板易拆</a>
+                <a href="#" class="high-light">领券更优惠</a>
+                <a href="#">全国联保</a>
+                <a href="#" class="high-light">咨询大惊喜</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">全自动感应</a>
+                <a href="#">即热式功能</a>
+                <a href="#">智能护理</a>
+                <a href="#">官方正品</a>
+                <a href="#">高效节水</a>
+                <a href="#">立减300</a>
+                <a href="#">官方正品</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#" class="high-light">3秒速冲</a>
+                <a href="#">送角阀软管</a>
+                <a href="#">送角阀软管</a>
+                <a href="#">12大中心仓</a>
+                <a href="#">12大中心仓</a>
+                <a href="#">蹲坐两用</a>
+                <a href="#">领券减50</a>
+                <a href="#">全国联保</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">德国品牌</a>
+                <a href="#">加购收藏</a>
+                <a href="#">加长型缸体</a>
+                <a href="#">喷射虹吸</a>
+                <a href="#">家装狂欢节</a>
+                <a href="#" class="high-light">AB1287</a>
+                <a href="#">领券再减</a>
+                <a href="#">千城入户</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">强劲冲力</a>
+                <a href="#">包安装</a>
+                <a href="#">土豪直接付款</a>
+                <a href="#">咨询在线客服</a>
+                <a href="#">赠送原厂配件</a>
+                <a href="#">新聚汇</a>
+                <a href="#" class="high-light">吸力哥</a>
+                <a href="#">九牧正品</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">覆盖区域内</a>
+                <a href="#">指定1800</a>
+                <a href="#" class="high-light">晒图返10元</a>
+                <a href="#">1300城免</a>
+                <a href="#">久坐舒适</a>
+                <a href="#" class="high-light">晒图送20元</a>
+                <a href="#" class="high-light">摩普智能马桶</a>
+                <a href="#">双杆喷头</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">送空调扇</a>
+                <a href="#">咨询大惊喜</a>
+                <a href="#">节水小管家</a>
+                <a href="#">高端大气</a>
+                <a href="#" class="high-light">科勒授权</a>
+                <a href="#">超旋风系列</a>
+                <a href="#">限时升级</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">立减500</a>
+                <a href="#">赠送角阀软管</a>
+                <a href="#">法恩莎正品</a>
+                <a href="#">12大中心仓</a>
+                <div class="bottom-line"></div>
+            </div>
+        </div>
+        <div class="products-aside-category" cid="81">
+            <div class="row">
+                <a href="#" class="high-light">热卖推荐</a>
+                <a href="#">高档户型客厅</a>
+                <a href="#">16CM坐垫</a>
+                <a href="#" class="high-light">匠心独运</a>
+                <a href="#">大小户型沙发</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">8.23预售</a>
+                <a href="#">热销爆款</a>
+                <a href="#">高档进口牛皮</a>
+                <a href="#">三位可躺</a>
+                <a href="#">北美进口橡木</a>
+                <a href="#">全香樟实木</a>
+                <a href="#" class="high-light">厂家直销</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#" class="high-light">可拆洗</a>
+                <a href="#">4级抗污</a>
+                <a href="#" class="high-light">多功能</a>
+                <a href="#">全实木雕刻</a>
+                <a href="#" class="high-light">3D玛雅绒</a>
+                <a href="#">北美橡木</a>
+                <a href="#">防水防污</a>
+                <a href="#">都市转角户型</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">多功能扶手</a>
+                <a href="#">彼爱专利产品</a>
+                <a href="#">国际设计师</a>
+                <a href="#">进口头层牛皮</a>
+                <a href="#" class="high-light">经典爆款</a>
+                <a href="#">可拆洗设计</a>
+                <a href="#">优质棉麻面料</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">高档超柔绒布</a>
+                <a href="#">进口橡木框架</a>
+                <a href="#" class="high-light">欧洲白蜡木</a>
+                <a href="#">北美黑胡桃</a>
+                <a href="#">质保3年</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">8.29零点</a>
+                <a href="#" class="high-light">头层牛皮</a>
+                <a href="#">实木雕花</a>
+                <a href="#">全拆洗</a>
+                <a href="#">大师设计</a>
+                <div class="bottom-line"></div>
+            </div>
+            <div class="row">
+                <a href="#">20-22号</a>
+                <a href="#">北美黑胡桃</a>
+                <a href="#" class="high-light">泰国进口实木</a>
+                <a href="#">8.22聚价</a>
+                <a href="#">品质保证</a>
+                <a href="#">优质绒布</a>
                 <div class="bottom-line"></div>
             </div>
         </div>
