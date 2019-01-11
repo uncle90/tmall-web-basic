@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>分类页</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript">
+    </script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
+    <style type="text/css">
+        body{
+            font-size: 12px;
+            font-family: Arial;
+            min-width: 1024px;
+            /* width: 1920px; */
+        }
+        a{
+            color: #999999;
+        }
+        a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+        .red{
+            color: #C40000 !important;
+        }
+        nav.top{
+            background-color: #f2f2f2;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom:1px solid #e7e7e7;
+        }
+        nav.top .top_main{
+            max-width: 1024px;
+            margin: 0px auto;
+        }
+        nav.top .top_main .float-right{
+            display: inline-block;
+            float: right;
+        }
+        nav.top .top_main span, nav.top a{
+            color: #999999;
+            margin: 0px 10px;
+        }
+        nav.top .top_main a:hover{
+            text-decoration: none;
+            color: #C40000;
+        }
+        .searchbox{}
+        .searchbox_main{
+            max-width: 1024px;
+            position: relative;
+            margin: 0px auto;
+        }
+        .searchbox_main img.logo{
+            position: absolute;
+            top: -50px;
+            left: -40px;
+            z-index:-1; /*-1表示放在下面，免得图片挡住了输入框*/
+        }
+        .searchbox_main .search-box{
+            width: 400px;
+            height: 40px;
+            margin: 50px auto;
+            background-color: #C40000;
+        }
+        .searchbox_main .search-box input{
+            width: 275px;
+            height: 36px;
+            border: none;
+            outline: none;
+            margin: 2px;
+            padding: 5px;
+        }
+        /*把search-below挤出height区*/
+        .searchbox_main .search-box button{
+            width: 110px;
+            background-color: #C40000;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            vertical-align: middle;
+            border: none;
+            outline: none;
+        }
+        .searchbox_main .search-below{
+            margin-left: -20px;
+            margin-top: 5px;
+            color: #999999;
+        }
+        .searchbox_main .search-below a{
+            font-size: 14px;
+            margin: 0px 20px;
+        }
+        .categoryProducts{
+            width: 1024px;
+            margin: 10px auto;
+        }
+        .categoryProducts .categorySortBar{
+            background-color: #FAF9F9;
+            margin: 40px 20px 20px 20px;
+        }
+        .categoryProducts .categorySortBarTable{
+            display: inline-block;
+            border-collapse: collapse;
+        }
+        .categoryProducts .categorySortBarTable .glyphicon{
+            font-size: 10px;
+        }
+        .categoryProducts .categorySortBarTable td{
+            border: 1px solid #CCCCCC;
+            height: 23px;
+            padding: 3px;
+            font-size: 12px;
+        }
+        .categoryProducts .categorySortBarTable td a{
+            color: #806F66;
+        }
+        .categoryProducts .categorySortBarTable .grayColumn{
+            background-color: #F1EDEC;
+        }
+        .categoryProducts .categorySortBarTable .priceMiddleColumn{
+            color: #CCCCCC;
+            text-align: center;
+            vertical-align: middle;
+            width: 10px;
+        }
+        .categoryProducts .categorySortBarTable .sortBarPrice{
+            border: none;
+            height: 100%;
+            width: 50px;
+        }
+        .categoryProducts .product-list{
+            padding: 0px 20px 40px 20px;
+        }
+        .categoryProducts .product-list .product-item{
+            float: left;
+            width: 225px;
+            height: 338px;
+            cursor: pointer;
+            margin: 12px 5px;
+            background-color: white;
+            border: 3px solid white;
+        }
+        .categoryProducts .product-list .product-item:hover{
+            border: 3px solid #C40000;
+        }
+        .categoryProducts .product-list .product-item .inner-frame{
+            border: 1px solid #EEEEEE;
+        }
+        .categoryProducts .product-list .product-item .inner-frame:hover{
+            border: 1px solid #C40000;
+        }
+        .categoryProducts .product-item .product-image{
+            width: 100%;
+            height: 190px;
+        }
+        .categoryProducts .product-item .product-price{
+            display: block;
+            padding-left: 4px;
+            font-size: 20px;
+            color: #CC0000;
+        }
+        .categoryProducts .product-item a.product-desc{
+            display: block;
+            margin: 10px auto;
+            color: #333333;
+            height: 34px;
+        }
+        .categoryProducts .product-item a.product-desc:hover{
+            text-decoration: underline;
+            color: #C40000;
+        }
+        .categoryProducts .product-item a.tmall-link{
+            display: block;
+            margin: 10px auto;
+            text-decoration: underline;
+        }
+        .categoryProducts .product-item a.tmall-link:hover{
+            text-decoration: underline;
+            color: #C40000;
+        }
+        .categoryProducts .product-item .product-info{
+            border-top: 1px solid #EEEEEE;
+        }
+        .categoryProducts .product-item .product-info .monthDealNumber{
+            color: #B57C5B;
+            font-weight: bold;
+        }
+        .categoryProducts .product-item .product-info .productReviewNumber{
+            color: #3388BB;
+            font-weight: bold;
+        }
+        .categoryProducts .product-item span.monthDeal, .categoryProducts .product-item span.productReview{
+            display: inline-block;
+            height: 30px;
+            padding-top: 5px;
+            padding-left: 5px;
+            width: 90px
+        }
+        .categoryProducts .product-item span.productReview{
+            border-left: 1px solid #EEEEEE;
+            border-right: 1px solid #EEEEEE;
+        }
+        .footer{
+            border-top: 1px solid #e7e7e7;
+        }
+        .footer .horizontal-line{
+            border-top: 1px solid #e7e7e7;
+        }
+        .footer .footer-top{
+            margin: 24px auto;
+            text-align: center;
+        }
+        .footer .footer-middle{
+            max-width: 1024px;
+            margin: 0px auto;
+            padding-top: 30px;
+        }
+        .footer .footer-middle .column{
+            float: left;
+            width: 20%;
+            padding-left: 10px;
+        }
+        .footer .footer-middle .column a{
+            display: block;
+            padding-top: 3px;
+        }
+        .footer .footer-middle .columnTitle{
+            color: #646464;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer .footer-copyright{
+            background-color: black;
+            margin-top: 20px;
+            border-top: 2px solid #C40000;
+        }
+        .footer .copyright_main{
+            position: relative;
+            max-width: 1024px;
+            margin: 0px auto;
+        }
+        .footer .copyright_main .cateye{
+            position: absolute;
+            display: block;
+            top: -34px;
+            left: 5px;
+        }
+        .footer .copyright_main .white{
+            margin-left: 10px;
+            padding: 10px 0px;
+        }
+        .footer .copyright_main .white a, .footer .copyright_main .white span{
+            color: white;
+        }
+        .footer .copyright_main .white a{
+            padding: 0px 5px;
+        }
+        .footer .copyright_main .white a:first-child{
+            padding-left: 0px;
+        }
+        .footer .copyright_main .license{
+            color: #A4A4A4;
+            margin-left: 10px;
+            padding-bottom: 30px;
+        }
+        .footer .copyright_main .license .copyrightYear{
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+
+<nav class="top">
+    <div class="top_main">
+        <a href="#">
+            <span class="glyphicon glyphicon-home red"></span>
+            天猫首页
+        </a>
+        <span>喵，欢迎来天猫</span>
+        <a href="#">请登录</a>
+        <a href="#">免费注册</a>
+        <span class="float-right">
+            <a href="#">我的订单</a>
+            <a href="#">
+                <span class="glyphicon glyphicon-shopping-cart red"></span>
+                购物车<strong>0</strong>件
+            </a>
+        </span>
+    </div>
+</nav>
+
+<div class="searchbox">
+    <div class="searchbox_main">
+        <a href="#">
+            <img class="logo" src="image/logo.gif">
+        </a>
+        <div class="search-box">
+            <input placeholder="时尚眼镜 太阳镜" type="text"/>
+            <button type="submit">搜索</button>
+            <div class="search-below">
+                <a href="#">平衡车</a>
+                <span>|</span>
+                <a href="#">扫地机器人</a>
+                <span>|</span>
+                <a href="#">原汁机</a>
+                <span>|</span>
+                <a href="#">冰箱</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="categoryProducts">
+    <img class="" src="image/category/83.jpg" />
+
+    <div class="categorySortBar">
+        <table class="categorySortBarTable">
+            <tr>
+                <td class="grayColumn"><a href="#">综合<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td><a href="#">人气<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td><a href="#">新品<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td><a href="#">销量<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td><a href="#">价格<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+            </tr>
+        </table>
+        <table class="categorySortBarTable">
+            <tr>
+                <td><input type="number" class="sortBarPrice lowPrice" placeholder="请输入"/></td>
+                <td class="grayColumn priceMiddleColumn">-</td>
+                <td><input type="number" class="sortBarPrice highPrice" placeholder="请输入"/></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="product-list">
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
+                <span class="product-price">￥1,874.25</span>
+                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-top">
+        <a href="#"><img src="image/ensure.png"/></a>
+    </div>
+    <div class="horizontal-line"></div>
+    <div class="footer-middle">
+        <div class="column">
+            <span class="columnTitle">购物指南</span>
+            <a href="#">免费注册</a>
+            <a href="#">开通支付宝</a>
+            <a href="#">支付宝充值</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">天猫保障</span>
+            <a href="#">发票保障</a>
+            <a href="#">售后规则</a>
+            <a href="#">缺货赔付</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">支付方式</span>
+            <a href="#">快捷支付</a>
+            <a href="#">信用卡</a>
+            <a href="#">蚂蚁花呗</a>
+            <a href="#">货到付款</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">商家服务</span>
+            <a href="#">商家入驻</a>
+            <a href="#">商家中心</a>
+            <a href="#">天猫智库</a>
+            <a href="#">天猫规则</a>
+            <a href="#">物流服务</a>
+            <a href="#">喵言喵语</a>
+            <a href="#">运营服务</a>
+        </div>
+        <div class="column">
+            <span class="columnTitle">手机天猫</span>
+            <a href="#"><img src="image/ma.png"/></a>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="footer-copyright">
+        <div class="copyright_main">
+            <img src="image/cateye.png" class="cateye"/>
+            <div class="white">
+                <a href="#">关于天猫</a>
+                <a href="#">帮助中心</a>
+                <a href="#">开放平台</a>
+                <a href="#">诚聘英才</a>
+                <a href="#">联系我们</a>
+                <a href="#">网站合作</a>
+                <a href="#">法律声明</a>
+                <a href="#">知识产权</a>
+                <a href="#">廉正举报</a>
+            </div>
+            <div class="white">
+                <a href="#">阿里巴巴集团</a>
+                <span>|</span>
+                <a href="#">淘宝网</a>
+                <span>|</span>
+                <a href="#">天猫</a>
+                <span>|</span>
+                <a href="#">聚划算</a>
+                <span>|</span>
+                <a href="#">全球速卖通</a>
+                <span>|</span>
+                <a href="#">阿里巴巴国际交易市场</a>
+                <span>|</span>
+                <a href="#">1688</a>
+                <span>|</span>
+                <a href="#">阿里妈妈</a>
+                <span>|</span>
+                <a href="#">阿里旅行·去啊</a>
+                <span>|</span>
+                <a href="#">阿里云计算</a>
+                <span>|</span>
+                <a href="#">阿里通信</a>
+                <span>|</span>
+                <a href="#">YunOS</a>
+                <span>|</span>
+                <a href="#">阿里旅行·去啊</a>
+                <span>|</span>
+                <a href="#">万网</a>
+                <span>|</span>
+                <a href="#">高德</a>
+                <span>|</span>
+                <a href="#">优视</a>
+                <span>|</span>
+                <a href="#">友盟</a>
+                <span>|</span>
+                <a href="#">虾米</a>
+                <span>|</span>
+                <a href="#">天天动听</a>
+                <span>|</span>
+                <a href="#">来往</a>
+                <span>|</span>
+                <a href="#">钉钉</a>
+                <span>|</span>
+                <a href="#">支付宝</a>
+            </div>
+            <div class="license">
+                <span>增值电信业务经营许可证： 浙B2-20110446</span>
+                <span>网络文化经营许可证：浙网文[2015]0295-065号</span>
+                <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号</span>
+                <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
+                <div class="copyrightYear">&copy;&nbsp;2003-2016 TMALL.COM 版权所有</div>
+                <div>
+                    <img src="image/copyRight1.jpg" />
+                    <img src="image/copyRight2.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
