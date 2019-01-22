@@ -5,6 +5,20 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script type="text/javascript">
+        function productFiltByPrice() {
+            var low = $("input.lowPrice").val();
+            var high = $("input.highPrice").val();
+            if(low != undefined && low != ""){
+                $(".product-list .product-item").each(function(){
+                    if($(this).attr("price") < low){$(this).hide();}
+                });
+            }
+            if(high != undefined && high != ""){
+                $(".product-list .product-item").each(function(){
+                    if($(this).attr("price") > high){$(this).hide();}
+                });
+            }
+        }
     </script>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" >
     <style type="text/css">
@@ -24,6 +38,16 @@
         .red{
             color: #C40000 !important;
         }
+        /*input type="number"去掉上下箭头*/
+        input[type="number"]{
+            -moz-appearance: textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+
         nav.top{
             background-color: #f2f2f2;
             padding-top: 5px;
@@ -107,17 +131,20 @@
         .categoryProducts .categorySortBarTable .glyphicon{
             font-size: 10px;
         }
+        .categoryProducts .categorySortBarTable .grayColumn{
+            background-color: #F1EDEC;
+        }
         .categoryProducts .categorySortBarTable td{
             border: 1px solid #CCCCCC;
             height: 23px;
             padding: 3px;
             font-size: 12px;
         }
+        .categoryProducts .categorySortBarTable:first-child td:hover{
+            background-color: #F1EDEC;
+        }
         .categoryProducts .categorySortBarTable td a{
             color: #806F66;
-        }
-        .categoryProducts .categorySortBarTable .grayColumn{
-            background-color: #F1EDEC;
         }
         .categoryProducts .categorySortBarTable .priceMiddleColumn{
             color: #CCCCCC;
@@ -326,88 +353,114 @@
         </table>
         <table class="categorySortBarTable">
             <tr>
-                <td><input type="number" class="sortBarPrice lowPrice" placeholder="请输入"/></td>
+                <td><input type="number" class="sortBarPrice lowPrice" placeholder="请输入" onchange="productFiltByPrice()"/></td>
                 <td class="grayColumn priceMiddleColumn">-</td>
-                <td><input type="number" class="sortBarPrice highPrice" placeholder="请输入"/></td>
+                <td><input type="number" class="sortBarPrice highPrice" placeholder="请输入" onchange="productFiltByPrice()"/></td>
             </tr>
         </table>
     </div>
 
     <div class="product-list">
-        <div class="product-item">
+        <div class="product-item" price="3824.16">
             <div class="inner-frame">
-                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
+                <a href="#"><img class="product-image" src="image/productSingle/665.jpg" /></a>
+                <span class="product-price">¥3,824.16</span>
                 <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">5314笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">183</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-item">
+        <div class="product-item" price="1874.25">
             <div class="inner-frame">
                 <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
-                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <span class="product-price">¥1,874.25</span>
+                <a href="#" class="product-desc">夏普屏PANDA/熊猫 LE39D71S 39英寸智能WiFi液晶平板电视40 42 43</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">2727笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">110</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-item">
+        <div class="product-item" price="1439.4">
             <div class="inner-frame">
-                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
-                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#"><img class="product-image" src="image/productSingle/654.jpg" /></a>
+                <span class="product-price">¥1,439.40</span>
+                <a href="#" class="product-desc">Hisense/海信 LED40EC520UA 40英寸4K智能平板液晶电视机WIFI网络</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">3122笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">90</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-item">
+        <div class="product-item" price="1874.25">
             <div class="inner-frame">
-                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
-                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#"><img class="product-image" src="image/productSingle/643.jpg" /></a>
+                <span class="product-price">¥1,874.25</span>
+                <a href="#" class="product-desc">Hisense/海信 LED49EC320A 49吋led液晶电视机智能网络平板电视50</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">1335笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">58</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-item">
+        <div class="product-item" price="1104.35">
             <div class="inner-frame">
-                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
-                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#"><img class="product-image" src="image/productSingle/632.jpg" /></a>
+                <span class="product-price">¥1,104.35</span>
+                <a href="#" class="product-desc">Konka/康佳 LED32S1卧室32吋安卓智能无线WIFI网络液晶平板电视机</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">670笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">31</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-item">
+        <div class="product-item" price="719.4">
             <div class="inner-frame">
-                <a href="#"><img class="product-image" src="image/productSingle/676.jpg" /></a>
-                <span class="product-price">￥1,874.25</span>
-                <a href="#" class="product-desc">Changhong/长虹 65S1安卓智能12核65英寸网络平板LED液晶电视机70</a>
+                <a href="#"><img class="product-image" src="image/productSingle/567.jpg" /></a>
+                <span class="product-price">¥719.40</span>
+                <a href="#" class="product-desc">Changhong/长虹 LED32B2080n 32吋led液晶电视机网络平板电视彩电</a>
                 <a href="#" class="tmall-link">天猫专卖</a>
                 <div class="product-info">
-                    <span class="monthDeal">月成交<span class="monthDealNumber">61笔</span></span>
-                    <span class="productReview">评价<span class="productReviewNumber">20</span></span>
+                    <span class="monthDeal">月成交<span class="monthDealNumber">528笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">28</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item" price="5399.1">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/46.jpg" /></a>
+                <span class="product-price">¥5,399.10</span>
+                <a href="#" class="product-desc">Hisense/海信 LED55EC760UC 55吋曲面4K超清HDR液晶电视机平板60</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">128笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">26</span></span>
+                    <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item" price="5759.1">
+            <div class="inner-frame">
+                <a href="#"><img class="product-image" src="image/productSingle/35.jpg" /></a>
+                <span class="product-price">¥5,759.10</span>
+                <a href="#" class="product-desc">Hisense/海信 LED60EC660US 60吋轻薄4K HDR真14核智能液晶电视65</a>
+                <a href="#" class="tmall-link">天猫专卖</a>
+                <div class="product-info">
+                    <span class="monthDeal">月成交<span class="monthDealNumber">415笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">25</span></span>
                     <a href="#" class="aliwangwang"><img src="image/site/wangwang.png"/></a>
                 </div>
             </div>
