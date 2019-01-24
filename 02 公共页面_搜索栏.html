@@ -20,25 +20,24 @@
         .red{
             color: #C40000 !important;
         }
-        .searchbox{}
-        .searchbox_main{
+        .search-box{
             max-width: 1024px;
             position: relative;
             margin: 0px auto;
         }
-        .searchbox_main img.logo{
+        .search-box img.logo{
             position: absolute;
             top: -50px;
             left: 10px;
             z-index:-1; /*-1表示放在下面，免得图片挡住了输入框*/
         }
-        .searchbox_main .search-box{
+        .search-box .search-box{
             width: 400px;
             height: 40px;
             margin: 50px auto;
             background-color: #C40000;
         }
-        .searchbox_main .search-box input{
+        .search-box .search-box input{
             width: 275px;
             height: 36px;
             border: none;
@@ -47,7 +46,7 @@
             padding: 5px;
         }
         /*把search-below挤出height区*/
-        .searchbox_main .search-box button{
+        .search-box .search-box button{
             width: 110px;
             background-color: #C40000;
             font-size: 20px;
@@ -57,18 +56,18 @@
             border: none;
             outline: none;
         }
-        .searchbox_main .search-below{
+        .search-box .search-below{
             margin-left: -20px;
             margin-top: 5px;
         }
-        .searchbox_main .search-below a{
+        .search-box .search-below a{
             font-size: 14px;
             margin: 0px 20px;
         }
     </style>
 </head>
 <div class="searchbox">
-    <div class="searchbox_main">
+    <div class="search-box">
         <a href="#">
             <img class="logo" src="image/logo.gif">
         </a>
