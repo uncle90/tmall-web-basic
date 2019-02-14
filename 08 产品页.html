@@ -129,7 +129,6 @@
             border: 2px solid black;
         }
         .category-product-detail .product-img-info .info-div{
-            border: 1px solid black;
             overflow: hidden;
             padding: 0px 20px;
         }
@@ -218,10 +217,16 @@
         }
         .category-product-detail .product-img-info .product-number .arrow{
             display: inline-block;
+            vertical-align: top;
         }
         .category-product-detail .product-img-info .product-number .arrow span.glyphicon{
             border: 1px solid;
             display: block;
+            width: 25px;
+            text-align: center;
+            font-size: 10px;
+            height: 13px;
+            line-height: 13px;
         }
         .category-product-detail .product-img-info .product-number .arrow span.updownMiddle{
             display: block;
@@ -234,6 +239,36 @@
         }
         .category-product-detail .product-img-info .product-service{
             margin: 20px 0px;
+        }
+        .category-product-detail .product-img-info .product-service .promise-title{
+            color: #999999;
+        }
+        .category-product-detail .product-img-info .product-service .promise-content a{
+            color: #666666;
+        }
+        .category-product-detail .product-img-info .shopping{
+            text-align: center;
+            margin: 20px auto;
+        }
+        .category-product-detail .product-img-info .shopping .buy{
+            width: 180px;
+            height: 40px;
+            background-color: #FFEDED;
+            border: 1px solid #C40000;
+            color: #C40000;
+            font-size: 16px;
+            margin: 0px 10px;
+            outline: none;
+        }
+        .category-product-detail .product-img-info .shopping .add-shopping-cart{
+            width: 180px;
+            height: 40px;
+            background-color: #C40000;
+            border: 1px solid #C40000;
+            color: white;
+            font-size: 16px;
+            margin: 0px 10px;
+            outline: none;
         }
 
 
@@ -404,16 +439,22 @@
                     件 库存66件
                 </div>
                 <div class="product-service">
-                    <span class="title">服务承诺</span>
-                    <span><a href="#">正品保证</a></span>
-                    <span><a href="#">极速退款</a></span>
-                    <span><a href="#">赠运费险</a></span>
-                    <span><a href="#">七天无理由退换</a></span>
+                    <span class="promise-title">服务承诺</span>
+                    <span class="promise-content">
+                        <a href="#nowhere">正品保证</a>
+                        <a href="#nowhere">极速退款</a>
+                        <a href="#nowhere">赠运费险</a>
+                        <a href="#nowhere">七天无理由退换</a>
+                    </span>
                 </div>
                 <div class="shopping">
-                    <button type="button" class="buy">立即购买</button>
-                    <button type="button" class="add-shopping-cart">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
+                    <a href="#nowhere"><button type="button" class="buy">立即购买</button></a>
+                    <a href="#nowhere">
+                        <button type="button" class="add-shopping-cart">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            加入购物车
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
